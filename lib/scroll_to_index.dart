@@ -27,19 +27,19 @@ Rect defaultViewportBoundaryGetter() => Rect.zero;
 
 abstract class AutoScrollController implements ScrollController {
   factory AutoScrollController(
-      {double initialScrollOffset: 0.0,
-      bool keepScrollOffset: true,
+      {double? initialScrollOffset: 0.0,
+      bool? keepScrollOffset: true,
       double? suggestedRowHeight,
-      ViewportBoundaryGetter viewportBoundaryGetter:
+      ViewportBoundaryGetter? viewportBoundaryGetter:
           defaultViewportBoundaryGetter,
       Axis? axis,
       String? debugLabel,
       AutoScrollController? copyTagsFrom}) {
     return SimpleAutoScrollController(
-        initialScrollOffset: initialScrollOffset,
-        keepScrollOffset: keepScrollOffset,
+        initialScrollOffset: initialScrollOffset!,
+        keepScrollOffset: keepScrollOffset!,
         suggestedRowHeight: suggestedRowHeight!,
-        viewportBoundaryGetter: viewportBoundaryGetter,
+        viewportBoundaryGetter: viewportBoundaryGetter!,
         beginGetter: axis == Axis.horizontal ? (r) => r.left : (r) => r.top,
         endGetter: axis == Axis.horizontal ? (r) => r.right : (r) => r.bottom,
         copyTagsFrom: copyTagsFrom!,
@@ -420,7 +420,7 @@ mixin AutoScrollControllerMixin on ScrollController
 
     if (tagMap[currentNearestIndex] == null) return -1;
 
-    if (useSuggested && suggestedRowHeight != null) {
+    if (useSuggested ) {
       final indexDiff = (targetIndex - currentNearestIndex);
       final offsetToLastState = _offsetToRevealInViewport(
           currentNearestIndex, indexDiff <= 0 ? 0 : 1);
